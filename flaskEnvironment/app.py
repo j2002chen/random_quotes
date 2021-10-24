@@ -1,20 +1,20 @@
 from flask import Flask
 from flask_restful import Api, Resource, reqparse
 from ai_quotes import ai_quotes 
-import random
+import quoteHandler
+
 
 app = Flask(__name__)
 api = Api(app)
 
 
 class Quote(Resource):
+    
     def get(self, id=0):
         if id == 0:
-            return random.choice(ai_quotes), 200
-        for quote in ai_quotes:
-            if(quote["id"] == id):
-                return quote, 200
-        return "Quote not found", 404
+            quoteHandler.baseCase()
+        quoteHandler.randomChoice()
+        quoteHandler.error404()
 
 def post(self, id):
       parser = reqparse.RequestParser()
@@ -62,9 +62,8 @@ def delete(self, id):
       return f"Quote with id {id} is deleted.", 200
 
 @app.after_request
-def after_request(response):
+def after_request(response): 
     response.headers.add('Access-Control-Allow-Origin','*')
-    response.headers.add('Content-Type','application/json')
     return response
 
 api.add_resource(Quote, "/ai-quotes", "/ai-quotes/", "/ai-quotes/<int:id>")
