@@ -5,9 +5,17 @@ global i,j,k
 i,j,k = 0
 
 class TestClass:
-    def basecaseTest():
-        val = 0
-        assert Quote.get(self,val) == quoteHandler.baseCase()
+
+    def randomQuoteTest():
+        assert ai_quotes.contains(randomQuote())
+        
+    def selectQuoteTest():
+        for id in range(0,9):
+            success = false
+            for quote in ai_quotes:
+                if(quote["id"] == id):
+                    success = true
+            assert success == true
 
     def regularCaseTest():
         val = ai_quotes.ID
