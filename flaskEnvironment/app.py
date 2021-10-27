@@ -12,8 +12,13 @@ class Quote(Resource):
     
     def get(self, id=0):
         if id == 0:
-            return quoteHandler.randomQuote()
-        return quoteHandler.selectQuote(id)
+            return quoteHandler.randomQuote(), 200
+        quote = quoteHandler.selectQuote(id), 200
+        if quote == "Quote not found":
+            return quote, 404
+        else:
+            return quote, 200
+    
 
     def post(self, id):
           parser = reqparse.RequestParser()

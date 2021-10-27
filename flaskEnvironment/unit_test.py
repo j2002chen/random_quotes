@@ -3,7 +3,8 @@ from quoteHandler import *
 from ai_quotes import ai_quotes
 
 def test_randomQuotes():
-    assert randomQuote() in ai_quotes == True
+    quote = randomQuote()
+    assert (quote in ai_quotes) == True
            
 def test_selectQuote():
     for id in range(0,9):
